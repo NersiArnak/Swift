@@ -56,14 +56,14 @@ if let abc = tupleStatusBadly.0, abc > 200, abc < 300 {
 
 print("\ntask3")
 
-var tupleStudent1 : (String?, String?, Int?) = (nil, nil, nil)
-var tupleStudent2 : (String?, String?, Int?) = (nil, nil, nil)
-var tupleStudent3 : (String?, String?, Int?) = (nil, nil, nil)
-var tupleStudent4 : (String?, String?, Int?) = (nil, nil, nil)
-var tupleStudent5 : (String?, String?, Int?) = (nil, nil, nil)
+var tupleStudent1 : (name:String?, carPlate:String?, grage:Int?)
+var tupleStudent2 : (name:String?, carPlate:String?, grage:Int?)
+var tupleStudent3 : (name:String?, carPlate:String?, grage:Int?)
+var tupleStudent4 : (name:String?, carPlate:String?, grage:Int?)
+var tupleStudent5 : (name:String?, carPlate:String?, grage:Int?)
 
 
-tupleStudent1.0 = "Arnak Nersisyan"
+tupleStudent1.name = "Arnak Nersisyan"
 tupleStudent1.1 = "О025ОО55"
 tupleStudent1.2 = 5
 
