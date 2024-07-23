@@ -1,5 +1,9 @@
+import Foundation
+
 //HomeWork9
+print("tesk1")
 let str = "In the vast expanse of the digital universe, where data flows like rivers through silicon valleys, there exists a unique challenge: crafting a message of precisely 200 characters, a task 1984 simple!!"
+
 let vowels = ["A", "E", "I", "O", "U", "Y", "a","e", "i", "o", "u", "y"]
 let consonants = ["B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Z", "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "z"]
 
@@ -17,10 +21,9 @@ for i in str {
             sumConsonants += 1
         case " ":
             sumSpaces += 1
-        case ",", "!", ":":
-            sumPunctuation += 1
+        
         default:
-            break
+        sumPunctuation += 1
         }
 }
 print("Гласные - \(sumVowels)")
@@ -101,6 +104,9 @@ switch tupleName {
 case (let myName, _, _) where charFirstName == charAO.0 || charFirstName == charAO.1:
     print("Name - \(tupleName.name)")
     
+//case (let myName, _, _) where myName.hasPrefix("A") || myName.hasPrefix("O"):
+//    print("Name - \(tupleName.name)"
+    
 case (_, let mySurName, _) where charFirstSurName == charEZ.0 || charFirstSurName == charEZ.1:
     print("SurName - \(tupleName.surName)")
     
@@ -116,7 +122,7 @@ let masLetters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
 
 var dict = [String : String]()
 
-let kor = (x:"j",y:2)
+let kor = (x:"j",y:5)
 var results : String = "мимо"
 
 let myShip11 = ("a",0)
