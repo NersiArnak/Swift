@@ -21,7 +21,6 @@ enum NameFigures : String {
     case PawnName = "Пешка"
 }
 
-
 enum ChessFigures {
     case King(name: NameFigures, color: ColorFigures, position: (Character, Int))
     case Queen(name: NameFigures, color: ColorFigures, position: (Character, Int))
@@ -29,7 +28,6 @@ enum ChessFigures {
     case Knight(name: NameFigures, color: ColorFigures, position: (Character, Int))
     case Rook(name: NameFigures, color: ColorFigures, position: (Character, Int))
     case Pawn(name: NameFigures, color: ColorFigures, position: (Character, Int))
-    
 }
 
 let KingBlack = ChessFigures.King(name: NameFigures.KingName, color: .Black, position: ("D", 0))
@@ -71,8 +69,7 @@ func printArrayFigures(masFigures: [ChessFigures]) {
 printArrayFigures(masFigures: arrayFigures)
 
 print("\ntask3")
-
-var board = Array(repeating: Array(repeating: "⬛️", count: 8), count: 8)
+var board = Array(repeating: Array(repeating: "⬛️", count: 9), count: 9)
 
 func editResults(enumchik: (ChessFigures)) -> ((Int, Int), String, String) {
     var tuple : (abc:Int, onenine:Int) = (0,0)
@@ -142,6 +139,14 @@ func printChessBoard(board: inout [[String]]) {
 }
 
 func drowBoard(board: inout [[String]], figure: ChessFigures) -> [[String]]{
+    let number = ["0️⃣", "1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣"]
+    let number1 = ["ℹ️", "0️⃣", "1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣"]
+    for i in 0..<number.count{
+        board[i][0] = number[i]
+    }
+    for i in 0..<number1.count{
+        board[8][i] = number1[i]
+    }
     for i in 0..<board.count {
         for j in 0..<board[i].count {
             let resultsConst = editResults(enumchik: figure)
@@ -157,7 +162,7 @@ func drowBoard(board: inout [[String]], figure: ChessFigures) -> [[String]]{
                         board[i][j] = "🟥"
                 }
             }
-            else if (i + j) % 2 == 0 && board[i][j] != "🟩" && board[i][j] != "🟥" {
+            else if (i + j) % 2 == 0 && board[i][j] != "🟩" && board[i][j] != "🟥" && board [i][j] != "0️⃣" && board [i][j] != "1️⃣" && board [i][j] != "2️⃣" && board [i][j] != "3️⃣" && board [i][j] != "4️⃣" && board [i][j] != "5️⃣" && board [i][j] != "6️⃣" && board [i][j] != "7️⃣" && board[i][j] != "ℹ️" {
                 board[i][j] = "⬜️"
             }
         }
