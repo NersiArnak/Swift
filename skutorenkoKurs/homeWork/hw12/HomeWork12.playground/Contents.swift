@@ -69,7 +69,7 @@ func printArrayFigures(masFigures: [ChessFigures]) {
 printArrayFigures(masFigures: arrayFigures)
 
 print("\ntask3")
-var board = Array(repeating: Array(repeating: "⬛️", count: 9), count: 9)
+var board = Array(repeating: Array(repeating: "⬛️", count: 8), count: 8)
 
 func editResults(enumchik: (ChessFigures)) -> ((Int, Int), String, String) {
     var tuple : (abc:Int, onenine:Int) = (0,0)
@@ -139,14 +139,6 @@ func printChessBoard(board: inout [[String]]) {
 }
 
 func drowBoard(board: inout [[String]], figure: ChessFigures) -> [[String]]{
-    let number = ["0️⃣", "1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣"]
-    let number1 = ["ℹ️", "0️⃣", "1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣"]
-    for i in 0..<number.count{
-        board[i][0] = number[i]
-    }
-    for i in 0..<number1.count{
-        board[8][i] = number1[i]
-    }
     for i in 0..<board.count {
         for j in 0..<board[i].count {
             let resultsConst = editResults(enumchik: figure)
@@ -245,7 +237,7 @@ func changeСoordinates(enumchik: ChessFigures, tupleNewCoor: (Int, Int)) {
     }
     printChessBoard(board: &board)
 }
-changeСoordinates(enumchik: RookBlack, tupleNewCoor: (5, 1))
+changeСoordinates(enumchik: BishopWhite, tupleNewCoor: (5, 3))
 
 
 //ClassWork12

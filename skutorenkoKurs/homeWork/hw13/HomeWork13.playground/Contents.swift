@@ -285,46 +285,35 @@ func newPosition(masChess: inout [[String]], figure: Characteristics, newPositio
                 let move = abs(c0 - oldC0)
                 if index == indexC1 && (move == 1 || move == 2) {
                     position(masChess: &masChess, c0: c0, oldC0: oldC0, indexC1: indexC1, index: index)
-                    if i == c0 && j == index {
-                        masChess[i][j] = figure.imageFigure
-                    }
                 }
             case "Король", "Королева":
                 let moveI = abs(c0 - oldC0), moveJ = abs(index - indexC1)
                 if (moveI == 1 || moveI == 0) && (moveJ == 1 || moveJ == 0) {
                     position(masChess: &masChess, c0: c0, oldC0: oldC0, indexC1: indexC1, index: index)
-                    if i == c0 && j == index {
-                        masChess[i][j] = figure.imageFigure
-                    }
                 }
             case "Слоняра":
                 let moveAddition = abs(c0 + index), moveSubtraction = abs(c0 - index)
                 if abs(oldC0 + indexC1) == moveAddition || abs(oldC0 - indexC1) == moveSubtraction {
                     position(masChess: &masChess, c0: c0, oldC0: oldC0, indexC1: indexC1, index: index)
-                    if i == c0 && j == index {
-                        masChess[i][j] = figure.imageFigure
-                    }
                 }
             case "Конь":
                 let moveI = 1, moveJ = 2
                 if abs(oldC0 - c0) == moveI && abs(indexC1 - index) == moveJ || abs(oldC0 - c0) == moveJ && abs(indexC1 - index) == moveI {
                     position(masChess: &masChess, c0: c0, oldC0: oldC0, indexC1: indexC1, index: index)
-                    if i == c0 && j == index {
-                        masChess[i][j] = figure.imageFigure
-                    }
                 }
             case "Ладья":
                 if c0 != oldC0 && index != indexC1 { break }
                 position(masChess: &masChess, c0: c0, oldC0: oldC0, indexC1: indexC1, index: index)
-                if i == c0 && j == index {
-                    masChess[i][j] = figure.imageFigure
-                }
+    
             default: break
+            }
+            if i == c0 && j == index {
+                masChess[i][j] = figure.imageFigure
             }
         }
     }
 }
-newPosition(masChess: &masChess, figure: bishopWhiteF, newPosition: (4, "B"))
+newPosition(masChess: &masChess, figure: pawnBlack2, newPosition: (3, "B"))
 print("\n")
 printChess(masChess: &masChess)
 

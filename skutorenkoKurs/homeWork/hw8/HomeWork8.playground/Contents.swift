@@ -65,7 +65,7 @@ var dict4 = [String : String]()
 dict["Комп"] = "computer"
 dict.keys
 dict["Комп"] = "Mac"
-print(dict)
+print("\n\(dict)")
 
 dict.updateValue("Mac", forKey: "Комп")
 let comp : String? = dict["Комп"]

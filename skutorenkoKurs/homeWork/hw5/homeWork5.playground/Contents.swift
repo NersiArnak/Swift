@@ -16,7 +16,6 @@ var answer = sum + (days * hbDay)
 print("\(answer) - секунд прошло от 1 января до моего дня рождения")
 
 print("\ntask2")
-
 let myHB = 2
 if myHB == 1 || myHB == 2 || myHB == 3 {
     print ("Вы родились в 1 квартале")
@@ -41,7 +40,6 @@ if (x <= 8 && x > 0) && (y <= 8 && y > 0) {
 } else {
    print("Недопустимый ввод")
 }
-
 
 //ClassWork5
 //Бинарные операторы

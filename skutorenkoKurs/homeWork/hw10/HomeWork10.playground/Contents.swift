@@ -64,7 +64,6 @@ func masReverse2(_ mas: inout [String], _ masReverse: inout [String]) -> [String
     }
     return masReverse
 }
-
 print(masReverse2(&array2, &arrayReverse))
 
 print("\ntask5")
@@ -142,6 +141,7 @@ func fact(number: Int) -> Int{
     }
 }
 fact(number: 5)
+
 
 //ClassWork10
 //func calcuelateMky(var wallet: [Int]) {
