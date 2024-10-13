@@ -4,8 +4,8 @@ let hours = 60 * 60
 let days = 24 * hours
 let mouth = 30 * days
 
-let hbMouth = 10
-let hbDay = 6
+let hbMouth = 2
+let hbDay = 25
 
 var sum = 0
 for i in 1..<hbMouth {
