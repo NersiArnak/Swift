@@ -1,5 +1,4 @@
 let contsArray = ["1", "2", "3", "4", "5"]
-
 var array: [String] = []
 
 if array.isEmpty {
@@ -56,19 +55,50 @@ for i in daysMonth.reversed() {
     print(i)
 }
 
-//print("\n№5")
-//let myHB = (25, "Март")
-//var days = 0
-//for (index, i) in month.enumerated() {
-//    if myHB.1 == i {
-//        days = index
-//    }
-//}
-//var sumDays = 0
-//for var i in 0..<daysMonth.count {
-//    while i < days {
-//        i += 1
-//        sumDays += daysMonth[i]
-//        print(sumDays)
-//    }
-//}
+print("\n№5")
+let myHB = (days:25, month: "Февраль")
+var sumDays = 0
+
+for i in 0..<month.count {
+    if month[i] != myHB.month {
+        sumDays += daysMonth[i]
+    }
+    else {
+        sumDays += myHB.days
+        break
+    }
+}
+
+print("\n№6")
+var mas : [Int?] = [12, nil, 132, 432, nil]
+
+var sumMas1 : Int = 0
+for i in mas {
+    if let a = i {
+        sumMas1 += a
+    }
+}
+print("Первый способ: сумма равно - \(sumMas1)")
+
+var sumMas2 = 0
+for i in mas {
+    let a = i ?? 0
+    if a != 0 {
+        sumMas2 += a
+    }
+}
+print("Второй способ: сумма равно - \(sumMas1)")
+
+
+print("\n№7")
+let alphabet = "abcdefghijklmnopqrstuvwxyz"
+var charArray = [String]()
+
+for i in alphabet {
+    let a = String(i)
+    charArray.append(a)
+}
+
+for i in charArray.reversed() {
+    print(i)
+}
