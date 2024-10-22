@@ -106,7 +106,6 @@ func convertor(char: Character, mas: [String: String]) -> String {
 
 func edidStr(str: inout String) -> String {
     let strNumbers = ["0":"ziro", "1":"one", "2":"two", "3":"three", "4":"fout", "5":"five", "6":"six", "7":"seven", "8":"eight", "9":"nine"]
-    
     var newStr = ""
     for var i in str {
         switch i {

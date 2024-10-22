@@ -19,7 +19,7 @@ print("Отсортированный массив по убыванию - \(arr
 
 print("\ntask3")
 let arrayNumber1 = [333, 22, 3, 44, 5, 55, 6, 66]
-func sortNumber(mas: [Int], funcClouser: (Int, Int?) -> Bool) -> Int{
+func sortNumber(mas: [Int], funcClouser: (Int, Int?) -> Bool) -> Int {
     var elementNil : Int?
     for i in mas {
         if funcClouser(i, elementNil)  {
