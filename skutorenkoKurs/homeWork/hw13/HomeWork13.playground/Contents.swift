@@ -147,7 +147,7 @@ let knightBlackB = Characteristics(nameFigure: nameFigure.Knight, imageFigure: i
 let knightBlackG = Characteristics(nameFigure: nameFigure.Knight, imageFigure: imageFigure.KnightBlack, position: (1, "G"))
 let bishopBlackC = Characteristics(nameFigure: nameFigure.Bishop, imageFigure: imageFigure.BishopBlack, position: (1, "C"))
 let bishopBlackF = Characteristics(nameFigure: nameFigure.Bishop, imageFigure: imageFigure.BishopBlack, position: (1, "F"))
-let kingBlackE = Characteristics(nameFigure: nameFigure.King, imageFigure: imageFigure.KingBlack, position: (1, "E"))
+let kingBlackE = Characteristics(nameFigure: nameFigure.King, imageFigure: imageFigure.KingBlack, position: (5, "E"))
 let queenBlackD = Characteristics(nameFigure: nameFigure.Queen, imageFigure: imageFigure.QueenBlack, position: (1, "D"))
 
 let pawnWhite1 = Characteristics(nameFigure: nameFigure.Pawn, imageFigure: imageFigure.PawnWhite, position: (7, "A"))
@@ -163,7 +163,7 @@ let rookWhiteH = Characteristics(nameFigure: nameFigure.Rook, imageFigure: image
 let knightWhiteB = Characteristics(nameFigure: nameFigure.Knight, imageFigure: imageFigure.KnightWhite, position: (8, "B"))
 let knightWhiteG = Characteristics(nameFigure: nameFigure.Knight, imageFigure: imageFigure.KnightWhite, position: (8, "G"))
 let bishopWhiteC = Characteristics(nameFigure: nameFigure.Bishop, imageFigure: imageFigure.BishopWhite, position: (8, "C"))
-let bishopWhiteF = Characteristics(nameFigure: nameFigure.Bishop, imageFigure: imageFigure.BishopWhite, position: (8, "F"))
+let bishopWhiteF = Characteristics(nameFigure: nameFigure.Bishop, imageFigure: imageFigure.BishopWhite, position: (5, "D"))
 let kingWhiteE = Characteristics(nameFigure: nameFigure.King, imageFigure: imageFigure.KingWhite, position: (8, "E"))
 let queenWhiteD = Characteristics(nameFigure: nameFigure.Queen, imageFigure: imageFigure.QueenWhite, position: (8, "D"))
 
@@ -313,7 +313,7 @@ func newPosition(masChess: inout [[String]], figure: Characteristics, newPositio
         }
     }
 }
-newPosition(masChess: &masChess, figure: pawnBlack2, newPosition: (3, "B"))
+newPosition(masChess: &masChess, figure: bishopWhiteF, newPosition: (2, "H"))
 print("\n")
 printChess(masChess: &masChess)
 
