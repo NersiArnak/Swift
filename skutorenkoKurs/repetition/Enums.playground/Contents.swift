@@ -100,12 +100,12 @@ func printAllFigures(array: [ChessFigure]) {
 printAllFigures(array: array)
 
 print("\n№3")
-var board : [[Character]] = Array(repeating: Array(repeating: " ", count: 8), count: 8)
+var board : [[Character]] = Array(repeating: Array(repeating: " ", count: 9), count: 9)
 
 func setFigure(board: inout [[Character]], figure: ChessFigure) {
     switch figure {
     case let .optionsFigure(_,icon, _, (x, y)):
-        let alphabet = "abcdefgh"
+        let alphabet = " abcdefgh"
         for (index, value) in alphabet.enumerated() {
             if value == y {
                 board[x][index] = icon.rawValue
@@ -132,6 +132,7 @@ func checkIcon(iconCheck: Character) -> Bool {
     return result
 }
 
+
 func drowBoard(board: inout [[Character]] ) {
     for i in 0..<board.count {
         for j in 0..<board[i].count {
@@ -143,6 +144,23 @@ func drowBoard(board: inout [[Character]] ) {
                     board[i][j] = "○"
                 }
             }
+            board[0][0] = " "
+            board[1][0] = "1"
+            board[2][0] = "2"
+            board[3][0] = "3"
+            board[4][0] = "4"
+            board[5][0] = "5"
+            board[6][0] = "6"
+            board[7][0] = "7"
+            board[8][0] = "8"
+            board[0][1] = "a"
+            board[0][2] = "b"
+            board[0][3] = "c"
+            board[0][4] = "d"
+            board[0][5] = "e"
+            board[0][6] = "f"
+            board[0][7] = "g"
+            board[0][8] = "h"
             print(board[i][j], terminator: " ")
         }
         print()
@@ -153,11 +171,8 @@ drowBoard(board: &board)
 
 print("\n№4")
 
-let c = (1, "a")
-
-
 func charToInt(position: (x: Int, y: Character)) -> (Int, Int) {
-    let alphabet = "abcdefgh"
+    let alphabet = " abcdefgh"
     var positionY = 0
     for (index, value) in alphabet.enumerated() {
         if value == position.y {
@@ -220,11 +235,12 @@ func moveFigure(board: inout [[Character]], figure: ChessFigure, newPosition: (x
             board[newPos.0][newPos.1] = icon.rawValue
             board[oldPos.0][oldPos.1] = "-"
         }
-    default: break
+    default:
+        print("Неверный ход!")
     }
 }
 
-moveFigure(board: &board, figure: queenWhite, newPosition: (4, "d"))
+moveFigure(board: &board, figure: queenWhite, newPosition: (8, "о"))
 drowBoard(board: &board)
 
 
