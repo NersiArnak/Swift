@@ -72,6 +72,7 @@ enum ChessFigure {
     }
 }
 
+
 let kingBlack = ChessFigure.optionsFigure(type: .King, icon:   .KingBlack, color: .Black, position: (x: 7, y: "b"))
 let kingWhite = ChessFigure.optionsFigure(type: .King, icon: .KingWhite, color: .White, position: (x: 2, y: "b"))
 let queenWhite = ChessFigure.optionsFigure(type: .Queen, icon: .QueenWhite, color: .White, position: (x: 5, y: "e"))
@@ -101,19 +102,6 @@ printAllFigures(array: array)
 print("\n№3")
 var board : [[Character]] = Array(repeating: Array(repeating: " ", count: 8), count: 8)
 
-func createdBoard(board: inout [[Character]]) {
-    for i in 0..<board.count {
-        for j in 0..<board[i].count {
-            if (i + j) % 2 == 1 {
-                board[i][j] = "●"
-            }
-            else {
-                board[i][j] = "○"
-            }
-        }
-    }
-}
-
 func setFigure(board: inout [[Character]], figure: ChessFigure) {
     switch figure {
     case let .optionsFigure(_,icon, _, (x, y)):
@@ -132,22 +120,34 @@ func setAllFigures(board: inout [[Character]], array: [ChessFigure]) {
     }
 }
 
-func drowBoard(board: inout [[Character]]) {
+func checkIcon(iconCheck: Character) -> Bool {
+    let arrayIcon : [Character] = ["♟", "♙", "♞", "♘", "♝", "♗", "♜", "♖", "♛", "♕", "♚", "♔"]
+    var result = true
+    for i in arrayIcon {
+        if iconCheck == i {
+            result = false
+            break
+        }
+    }
+    return result
+}
+
+func drowBoard(board: inout [[Character]] ) {
     for i in 0..<board.count {
         for j in 0..<board[i].count {
+            if checkIcon(iconCheck: board[i][j]) {
+                if (i + j) % 2 == 1 {
+                    board[i][j] = "●"
+                }
+                else {
+                    board[i][j] = "○"
+                }
+            }
             print(board[i][j], terminator: " ")
-            
-            if (i + j) % 2 == 1 {
-                board[i][j] = "●"
-            }
-            else {
-                board[i][j] = "○"
-            }
         }
         print()
     }
 }
-createdBoard(board: &board)
 setAllFigures(board: &board, array: array)
 drowBoard(board: &board)
 
@@ -166,7 +166,6 @@ func charToInt(position: (x: Int, y: Character)) -> (Int, Int) {
     }
     return (position.x, positionY)
 }
-
 
 func moveFigure(board: inout [[Character]], figure: ChessFigure, newPosition: (x: Int, y: Character)) {
     let newPos = charToInt(position: newPosition)
