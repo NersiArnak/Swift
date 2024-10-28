@@ -40,7 +40,7 @@
 //hw
 print("№1")
 enum ChessFigure {
-    case optionsFigure(type: TypeFigure, icon: Icon, color: Color, position: (x: Int, y: Character))
+    case OptionsFigure(type: TypeFigure, icon: Icon, color: Color, position: (x: Int, y: Character))
     
     enum Color : String {
         case White = "белый"
@@ -73,21 +73,20 @@ enum ChessFigure {
 }
 
 
-let kingBlack = ChessFigure.optionsFigure(type: .King, icon:   .KingBlack, color: .Black, position: (x: 7, y: "b"))
-let kingWhite = ChessFigure.optionsFigure(type: .King, icon: .KingWhite, color: .White, position: (x: 2, y: "b"))
-let queenWhite = ChessFigure.optionsFigure(type: .Queen, icon: .QueenWhite, color: .White, position: (x: 5, y: "e"))
-let rookBlack = ChessFigure.optionsFigure(type: .Rook, icon: .RookBlack, color: .Black, position: (x: 7, y: "h"))
-let pawnWhite = ChessFigure.optionsFigure(type: .Pawn, icon: .PawnWhite, color: .White, position: (x: 7, y: "g"))
-let bishopBlack = ChessFigure.optionsFigure(type: .Bishop, icon: .BishopBlack, color: .Black, position: (x: 5, y: "e"))
-let knightWhite = ChessFigure.optionsFigure(type: .Knight, icon: .KnightWhite, color: .White, position: (x: 3, y: "d"))
+let kingBlack = ChessFigure.OptionsFigure(type: .King, icon:   .KingBlack, color: .Black, position: (x: 7, y: "b"))
+let kingWhite = ChessFigure.OptionsFigure(type: .King, icon: .KingWhite, color: .White, position: (x: 2, y: "b"))
+let queenWhite = ChessFigure.OptionsFigure(type: .Queen, icon: .QueenWhite, color: .White, position: (x: 5, y: "e"))
+let rookBlack = ChessFigure.OptionsFigure(type: .Rook, icon: .RookBlack, color: .Black, position: (x: 7, y: "h"))
+let pawnWhite = ChessFigure.OptionsFigure(type: .Pawn, icon: .PawnWhite, color: .White, position: (x: 7, y: "g"))
+let bishopBlack = ChessFigure.OptionsFigure(type: .Bishop, icon: .BishopBlack, color: .Black, position: (x: 5, y: "e"))
+let knightWhite = ChessFigure.OptionsFigure(type: .Knight, icon: .KnightWhite, color: .White, position: (x: 3, y: "d"))
 
 print("\n№2")
-//let array = [kingBlack, kingWhite, queenWhite, rookBlack, pawnWhite, bishopBlack, knightWhite]
-let array = [queenWhite]
+let array = [kingBlack, kingWhite, queenWhite, rookBlack, pawnWhite, bishopBlack, knightWhite]
 
 func valueFigure(enumchik: ChessFigure) {
     switch enumchik {
-    case let .optionsFigure(type, icon, color, (x,y)):
+    case let .OptionsFigure(type, icon, color, (x,y)):
         print("Фигура - \(type.rawValue)\(icon.rawValue): цвет - \(color), координаты - (\(x)\(y))")
     }
 }
@@ -104,7 +103,7 @@ var board : [[Character]] = Array(repeating: Array(repeating: " ", count: 9), co
 
 func setFigure(board: inout [[Character]], figure: ChessFigure) {
     switch figure {
-    case let .optionsFigure(_,icon, _, (x, y)):
+    case let .OptionsFigure(_,icon, _, (x, y)):
         let alphabet = " abcdefgh"
         for (index, value) in alphabet.enumerated() {
             if value == y {
@@ -126,7 +125,6 @@ func checkIcon(iconCheck: Character) -> Bool {
     for i in arrayIcon {
         if iconCheck == i {
             result = false
-            break
         }
     }
     return result
@@ -186,20 +184,20 @@ func moveFigure(board: inout [[Character]], figure: ChessFigure, newPosition: (x
     let newPos = charToInt(position: newPosition)
     var moveI, moveJ: Int
     switch figure {
-    case let .optionsFigure(type, icon, _, (x, y)) where type == .Pawn:
+    case let .OptionsFigure(type, icon, _, (x, y)) where type == .Pawn:
         let oldPos = charToInt(position: (x, y))
         moveI = abs(newPos.0 - oldPos.0) //1 || 2
         if  moveI == 1 || moveI == 2 {
             board[newPos.0][newPos.1] = icon.rawValue
             board[oldPos.0][oldPos.1] = "-"
         }
-    case let .optionsFigure(type, icon, _, (x, y)) where type == .Rook:
+    case let .OptionsFigure(type, icon, _, (x, y)) where type == .Rook:
         let oldPos = charToInt(position: (x, y))
         if (newPos.1 == oldPos.1) || (newPos.0 == oldPos.0) {
             board[newPos.0][newPos.1] = icon.rawValue
             board[oldPos.0][oldPos.1] = "-"
         }
-    case let .optionsFigure(type, icon, _, (x, y)) where type == .King:
+    case let .OptionsFigure(type, icon, _, (x, y)) where type == .King:
         let oldPos = charToInt(position: (x, y))
         moveI = abs(newPos.0 - oldPos.0) //0 || 1
         moveJ = abs(newPos.1 - oldPos.1) //0 || 1
@@ -207,7 +205,7 @@ func moveFigure(board: inout [[Character]], figure: ChessFigure, newPosition: (x
             board[newPos.0][newPos.1] = icon.rawValue
             board[oldPos.0][oldPos.1] = "-"
         }
-    case let .optionsFigure(type, icon, _, (x, y)) where type == .Bishop:
+    case let .OptionsFigure(type, icon, _, (x, y)) where type == .Bishop:
         let oldPos = charToInt(position: (x, y))
         let sumOldPos = oldPos.0 + oldPos.1 //Сумма старых
         let disOldPos = oldPos.0 - oldPos.1 //Разность старых
@@ -217,7 +215,7 @@ func moveFigure(board: inout [[Character]], figure: ChessFigure, newPosition: (x
             board[newPos.0][newPos.1] = icon.rawValue
             board[oldPos.0][oldPos.1] = "-"
         }
-    case let .optionsFigure(type, icon, _, (x, y)) where type == .Knight:
+    case let .OptionsFigure(type, icon, _, (x, y)) where type == .Knight:
         let oldPos = charToInt(position: (x, y))
         moveI = abs(newPos.0 - oldPos.0) //1 || 2
         moveJ = abs(newPos.1 - oldPos.1) //1 || 2
@@ -225,7 +223,7 @@ func moveFigure(board: inout [[Character]], figure: ChessFigure, newPosition: (x
             board[newPos.0][newPos.1] = icon.rawValue
             board[oldPos.0][oldPos.1] = "-"
         }
-    case let .optionsFigure(type, icon, _, (x, y)) where type == .Queen:
+    case let .OptionsFigure(type, icon, _, (x, y)) where type == .Queen:
         let oldPos = charToInt(position: (x, y))
         let sumOldPos = oldPos.0 + oldPos.1 //Сумма старых
         let disOldPos = oldPos.0 - oldPos.1 //Разность старых
@@ -236,7 +234,7 @@ func moveFigure(board: inout [[Character]], figure: ChessFigure, newPosition: (x
             board[oldPos.0][oldPos.1] = "-"
         }
     default:
-        print("Неверный ход!")
+        print("Error")
     }
 }
 

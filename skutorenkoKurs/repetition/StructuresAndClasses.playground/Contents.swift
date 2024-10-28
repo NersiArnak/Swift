@@ -5,7 +5,7 @@
 //
 //st3.nam
 
-class  StudentClass {
+class StudentClass {
     var name : String
     var age : Int
     
@@ -137,3 +137,255 @@ newArray[0].name //Arnak
 newArray[0].name = "Arno"
 print("Старое имя: \(stMagazine[0].name), новое имя: \( newArray[0].name)")
 
+
+print("\n№5")
+
+class ClassStudent {
+    var name : String
+    var surname : String
+    var fatherName : String
+    var yearOfBirth : Int
+    var gpa : Double
+    
+    init() {
+        name = "nil"
+        surname = "nil"
+        fatherName = "nil"
+        yearOfBirth = 0
+        gpa = 0
+    }
+    
+    init(name: String, surname: String, fatherName: String, yearOfBirth: Int, gpa: Double ) {
+        self.name = name
+        self.surname = surname
+        self.fatherName = fatherName
+        self.yearOfBirth = yearOfBirth
+        self.gpa = gpa
+    }
+}
+
+var classSt1 = ClassStudent(name: "Angel", surname: "Belyaeva", fatherName: "Olegovna", yearOfBirth: 2005, gpa: 5.0)
+
+var classSt2 = ClassStudent(name: "Anton", surname: "Batonov", fatherName: "Vagenovich", yearOfBirth: 2000, gpa: 3.0)
+
+var classSt3 = ClassStudent(name: "Elizabeth", surname: "Sapitonova", fatherName: "Romanovna", yearOfBirth: 1993, gpa: 3.4)
+
+var classSt4 = ClassStudent(name: "Sofiya", surname: "Belyaeva", fatherName: "Arsenovna", yearOfBirth: 2003, gpa: 2.9)
+
+
+let arrayMagazine = [classSt1, classSt2, classSt3, classSt4]
+
+func printMagazine(array: [ClassStudent]) {
+    var index = 0
+    for i in array {
+        index += 1
+        print("\(index). Имя: \(i.name), Фамилия: \(i.surname), Отчество: \(i.fatherName), год рождения: \(i.yearOfBirth), гпа: \(i.gpa)")
+    }
+}
+
+printMagazine(array: arrayMagazine)
+
+print("\n№6")
+let sortedGpaClasses = arrayMagazine.sorted(by: {$0.gpa > $1.gpa})
+printMagazine(array: sortedGpaClasses)
+
+print("\n№7")
+let sortedSurNameClasses = arrayMagazine.sorted(by: {
+    if $0.surname == $1.surname {
+        return $0.name < $1.name
+    }
+    return $0.surname < $1.surname}
+)
+
+printMagazine(array: sortedSurNameClasses)
+
+print("\n№8")
+let newArrayСlasses = arrayMagazine
+print("Имя до изменений - \(newArrayСlasses[0].name)")
+newArrayСlasses[0].name = "Emka"
+print("Имя после изменений - \(newArrayСlasses[0].name)")
+print(arrayMagazine[0].name)
+
+print("\nChess using structure\n")
+
+struct ChessFigure {
+    var name : Name
+    var icon : Icon
+    var color : Color
+    var position : (Int, Character)
+}
+
+enum Color {
+    case Black
+    case White
+}
+enum Name : String {
+    case King = "Король"
+    case Queen = "Королева"
+    case Pawn = "Пешка"
+    case Rook = "Ладья"
+    case Knight = "Конь"
+    case Bishop = "Слон"
+    
+}
+
+enum Icon : Character {
+    case KingWhite = "♔"
+    case KingBlack = "♚"
+    case QueenWhite = "♕"
+    case QueenBlack = "♛"
+    case PawnWhite = "♙"
+    case PawnBlack = "♟"
+    case RookWhite = "♖"
+    case RookBlack = "♜"
+    case KnightWhite = "♘"
+    case KnightBlack = "♞"
+    case BishopWhite = "♗"
+    case BishopBlack = "♝"
+}
+
+let kingWhite = ChessFigure(name: .King, icon: .KingWhite, color: .White, position: (1, "a"))
+let blackQueen = ChessFigure(name: .Queen, icon: .QueenBlack, color: .Black, position: (3, "e"))
+let arrayFigures = [kingWhite, blackQueen]
+
+func valueFirures(figure: ChessFigure) {
+    var index = 0
+    index += 1
+    print("\(index). Фигура: \(figure.name.rawValue)\(figure.icon.rawValue), позиция: (x:\(figure.position.0) y:\(figure.position.1))")
+}
+
+func printAllFigures(array: [ChessFigure]) {
+    for i in array {
+        valueFirures(figure: i)
+    }
+}
+
+func charToInt(position: (x: Int, y: Character)) -> (Int, Int) {
+    let alphabet = " abcdefgh"
+    var positionY = 0
+    for (index, value) in alphabet.enumerated() {
+        if value == position.y {
+            positionY = index
+        }
+    }
+    return (position.x, positionY)
+}
+
+var board : [[Character]] = Array(repeating: Array(repeating: "-", count: 9), count: 9)
+
+func setFigures(board: inout [[Character]], figure: ChessFigure) {
+    let pos = charToInt(position: figure.position)
+    board[pos.0][pos.1] = figure.icon.rawValue
+}
+
+func setAllFigures(board: inout [[Character]], arrayFigures: [ChessFigure]) {
+    for i in arrayFigures {
+        setFigures(board: &board, figure: i)
+    }
+}
+
+func checkIcon(icon: Character) -> Bool {
+    let arrayIcon : [Character] = ["♔", "♚", "♕", "♛", "♙", "♟", "♖", "♜", "♘", "♞", "♗", "♝"]
+    var result = true
+    for i in arrayIcon {
+        if i == icon {
+            result = false
+        }
+    }
+    return result
+}
+
+func boardDrow(board: inout [[Character]]) {
+    for i in 0..<board.count {
+        for j in 0..<board[i].count {
+            if checkIcon(icon: board[i][j]) {
+                if (i+j) % 2 == 0 {
+                    board[i][j] = "●"
+                }
+                else {
+                    board[i][j] = "○"
+                }
+            }
+            board[0][0] = " "
+            board[1][0] = "1"
+            board[2][0] = "2"
+            board[3][0] = "3"
+            board[4][0] = "4"
+            board[5][0] = "5"
+            board[6][0] = "6"
+            board[7][0] = "7"
+            board[8][0] = "8"
+            board[0][1] = "a"
+            board[0][2] = "b"
+            board[0][3] = "c"
+            board[0][4] = "d"
+            board[0][5] = "e"
+            board[0][6] = "f"
+            board[0][7] = "g"
+            board[0][8] = "h"
+            print(board[i][j], terminator: " ")
+        }
+        print()
+    }
+}
+
+//func addFigure(board: inout [[Character]], figure: ChessFigure, newPosition: (x: Int, y: Character)) {
+//    let newPos = charToInt(position: newPosition)
+//    let oldPos = charToInt(position: figure.position)
+//    board[newPos.0][newPos.1] = figure.icon.rawValue
+//    board[oldPos.0][oldPos.1] = "-"
+//}
+
+func move(board: inout  [[Character]], figure: ChessFigure, newPosition: (x: Int, y: Character)) {
+    let newPos = charToInt(position: newPosition), oldPos = charToInt(position: figure.position)
+    var moveI, moveJ: Int
+    switch figure.name {
+    case .King:
+        moveI = abs(newPos.0 - oldPos.0) //0 || 1
+        moveJ = abs(newPos.1 - oldPos.1) //0 || 1
+        if  (moveI == 1 && moveJ == 1) || (moveI == 0 && moveJ == 1) || (moveI == 1 && moveJ == 0) {
+            board[newPos.0][newPos.1] = figure.icon.rawValue
+            board[oldPos.0][oldPos.1] = "-"
+        }
+    case .Queen:
+        let sumOldPos = oldPos.0 + oldPos.1, disOldPos = oldPos.0 - oldPos.1
+        let sumNewPos = newPos.0 + newPos.1, disNewPos = newPos.0 - newPos.1
+        if (sumNewPos == sumOldPos || disNewPos == disOldPos) || (newPos.1 == oldPos.1 || newPos.0 == oldPos.0) {
+            board[newPos.0][newPos.1] = figure.icon.rawValue
+            board[oldPos.0][oldPos.1] = "-"
+        }
+    case .Pawn:
+        moveI = abs(newPos.0 - oldPos.0) //1 || 2
+        if  moveI == 1 || moveI == 2 {
+            board[newPos.0][newPos.1] = figure.icon.rawValue
+            board[oldPos.0][oldPos.1] = "-"
+        }
+    case .Rook:
+        if (newPos.1 == oldPos.1) || (newPos.0 == oldPos.0) {
+            board[newPos.0][newPos.1] = figure.icon.rawValue
+            board[oldPos.0][oldPos.1] = "-"
+        }
+    case .Knight:
+        moveI = abs(newPos.0 - oldPos.0) //1 || 2
+        moveJ = abs(newPos.1 - oldPos.1) //1 || 2
+        if moveI + moveJ == 3 {
+            board[newPos.0][newPos.1] = figure.icon.rawValue
+            board[oldPos.0][oldPos.1] = "-"
+        }
+    case .Bishop:
+        let sumOldPos = oldPos.0 + oldPos.1, disOldPos = oldPos.0 - oldPos.1
+        let sumNewPos = newPos.0 + newPos.1, disNewPos = newPos.0 - newPos.1
+        if (sumNewPos == sumOldPos || disNewPos == disOldPos) {
+            board[newPos.0][newPos.1] = figure.icon.rawValue
+            board[oldPos.0][oldPos.1] = "-"
+        }
+    }
+    
+}
+
+setAllFigures(board: &board, arrayFigures: arrayFigures)
+boardDrow(board: &board)
+
+print()
+move(board: &board, figure: blackQueen, newPosition: (9,"g"))
+boardDrow(board: &board)
