@@ -329,12 +329,12 @@ func boardDrow(board: inout [[Character]]) {
     }
 }
 
-//func addFigure(board: inout [[Character]], figure: ChessFigure, newPosition: (x: Int, y: Character)) {
-//    let newPos = charToInt(position: newPosition)
-//    let oldPos = charToInt(position: figure.position)
-//    board[newPos.0][newPos.1] = figure.icon.rawValue
-//    board[oldPos.0][oldPos.1] = "-"
-//}
+func addFigure(board: inout [[Character]], figure: ChessFigure, newPosition: (x: Int, y: Character)) {
+    let newPos = charToInt(position: newPosition)
+    let oldPos = charToInt(position: figure.position)
+    board[newPos.0][newPos.1] = figure.icon.rawValue
+    board[oldPos.0][oldPos.1] = "-"
+}
 
 func move(board: inout  [[Character]], figure: ChessFigure, newPosition: (x: Int, y: Character)) {
     let newPos = charToInt(position: newPosition), oldPos = charToInt(position: figure.position)
@@ -380,7 +380,6 @@ func move(board: inout  [[Character]], figure: ChessFigure, newPosition: (x: Int
             board[oldPos.0][oldPos.1] = "-"
         }
     }
-    
 }
 
 setAllFigures(board: &board, arrayFigures: arrayFigures)
