@@ -1,10 +1,4 @@
-//cw
-//let st1 = (name: "Alex", age: 20)
-//let st2 = (name: "Bob", age: 22)
-//let st3 = (nam: "Sam", age: 23)
-//
-//st3.nam
-
+// MARK: class work
 class StudentClass {
     var name : String
     var age : Int
@@ -96,7 +90,7 @@ if nextVidoMode === someVideoMode {
     print("Yes!!!")
 }
 
-//hw
+//MARK: home work
 print("\n№1")
 struct Student {
     var name : String
@@ -386,5 +380,5 @@ setAllFigures(board: &board, arrayFigures: arrayFigures)
 boardDrow(board: &board)
 
 print()
-move(board: &board, figure: blackQueen, newPosition: (9,"g"))
+move(board: &board, figure: blackQueen, newPosition: (5,"g"))
 boardDrow(board: &board)
