@@ -55,37 +55,36 @@ p.moveBy(x: 2, andY: 3)
 print("\n№1")
 
 class Room {
-    var width: Int
     var height: Int
+    var width: Int
     var board: [[Character]]
     static let finalPoint : Character = "🟩"
 
-    init(width: Int, height: Int) {
+    init(height: Int, width: Int) {
         let lastIndexI = width - 1
         let lastIndexJ = height - 1
         self.width = width
         self.height = height
         self.board = Array(repeating: Array(repeating: "⬜️", count: width), count: height)
         
-        self.board[lastIndexI-1][lastIndexJ-1] = Room.finalPoint
+        self.board[lastIndexJ-1][lastIndexI-1] = Room.finalPoint
     }
 }
 
 
 func checkPosition(x: inout Int, y: inout Int, room: Room) -> Bool {
     let lastIndexI = room.width - 1
+    y
     let lastIndexJ = room.height - 1
-    var result = true
-    if (x <= 0 || y <= 0) || (x >= lastIndexI || x >= lastIndexJ) || (y >= lastIndexI || y >= lastIndexJ)/* || room.board[x][y] != "⬜️"*/ {
-        x
-        y
+    x
+    var res = true
+    if (x <= 0 || y <= 0) || (x >= lastIndexJ) || (y >= lastIndexI) {
         x = 1
         y = 1
         room.board[x][y] = "❌"
-        result =  false
-        
+        res =  false
     }
-    return result
+    return res
 }
 
     
@@ -93,6 +92,8 @@ class Person {
     var name : String
     var x : Int
     var y : Int
+    var count = 0
+    
     enum Direction {
         case Top
         case Down
@@ -104,49 +105,75 @@ class Person {
         room.board[self.x][self.y] = "⬜️"
         let lastIndexI = room.width - 1
         let lastIndexJ = room.height - 1
+        
+        func updateBoxPosition() {
+            room.board[box.x][box.y] = "⬜️"
+            if box.funcEditPoint(x: box.x, y: box.y, room: room) {
+                if room.board[box.x][box.y] != "🎉" {
+                    print("📩 Коробка двигается")
+                }
+                else {
+                    print("Победа 📌")
+                }
+            
+            } else {
+                print("Коробка взорвалась 🧨")
+            }
+        }
+        
+        func moveTop(x: inout Int, y: Int, room: Room, box: Box) {
+            count += 1
+            if x - 1 == box.x && y == box.y {
+                box.x = box.x - 1
+                updateBoxPosition()
+            }
+            x -= 1
+            print("\(count). Ход вверх")
+        }
+        
+        func moveDown(x: inout Int, y: Int, room: Room, box: Box) {
+            if x + 1 == box.x && y == box.y {
+                box.x = box.x + 1
+                updateBoxPosition()
+            }
+            x += 1
+            count += 1
+            print("\(count). Ход вниз")
+        }
+        
+        func moveRight(x: Int, y: inout Int, room: Room, box: Box) {
+            if y + 1 == box.y && x == box.x {
+                box.y = box.y + 1
+                updateBoxPosition()
+            }
+            y += 1
+            count += 1
+            print("\(count). Ход вправо")
+        }
+        
+        func moveLeft(x: Int, y: inout Int, room: Room, box: Box) {
+            if y - 1 == box.y && x == box.x {
+                box.y = box.y - 1
+                updateBoxPosition()
+            }
+            y -= 1
+            count += 1
+            print("\(count). Ход влево")
+        }
+        
         switch direction {
-        case .Top: if x - 1 == box.x && y == box.y{
-            room.board[box.x][box.y] = "⬜️"
-            box.x = box.x - 1
-            box.funcEditPoint(x: box.x, y: box.y, room: room)
-            x = x - 1;
-        }
-            else {
-                x = x - 1
-            }
-        case .Down: if x + 1 == box.x && y == box.y {
-            room.board[box.x][box.y] = "⬜️"
-            box.x = box.x + 1
-            box.funcEditPoint(x: box.x, y: box.y, room: room)
-            x = x + 1
-        }
-            else {
-                x = x + 1
-            }
-        case .Right: if y + 1 == box.y && x == box.x {
-            room.board[box.x][box.y] = "⬜️"
-            box.y = box.y + 1
-            box.funcEditPoint(x: box.x, y: box.y, room: room)
-            y = y + 1
-        }
-            else {
-                y = y + 1
-            }
-        case .Left: if y - 1 == box.y && x == box.x {
-            room.board[box.x][box.y] = "⬜️"
-            box.y = box.y - 1
-            box.funcEditPoint(x: box.x, y: box.y, room: room)
-            y = y - 1
-        }
-            else {
-                y = y - 1
-            }
+        case .Top: moveTop(x: &x, y: y, room: room, box: box)
+        case .Down: moveDown(x: &x, y: y, room: room, box: box)
+        case .Right: moveRight(x: x, y: &y, room: room, box: box)
+        case .Left: moveLeft(x: x, y: &y, room: room, box: box)
         }
         
         if checkPosition(x: &self.x, y: &self.y, room: room) {
-            room.board[self.x][self.y] = "🤖"
+            room.board[self.x][self.y] = "🥷"
         }
-        
+        else {
+            print("Персонаж \(room.board[self.x][self.y]) взорвался 🧨")
+        }
     }
     
     class Box {
@@ -161,15 +188,16 @@ class Person {
             }
         }
         
-        func funcEditPoint(x: Int, y: Int, room: Room) {
+        func funcEditPoint(x: Int, y: Int, room: Room) -> Bool {
+            var res = false
             if checkPosition(x: &self.x, y: &self.y, room: room) {
-                self.x
-                self.y
                 room.board[x][y] = "📦"
-                if x == room.width - 2 && y == room.height - 2 {
+                if x == room.height - 2 && y == room.width - 2 {
                     room.board[x][y] = "🎉"
                 }
+                res = true
             }
+            return res
         }
     }
     
@@ -178,12 +206,12 @@ class Person {
         self.x = x
         self.y = y
         if checkPosition(x: &self.x, y: &self.y, room: room) {
-            room.board[self.x][self.y] = "🤖"
+            room.board[self.x][self.y] = "🥷"
         }
     }
 }
 
-func printPersonInRoom(room: inout Room, person: Person) {
+func drowRoom(room: inout Room) {
     for i in 0..<room.board.count {
         for j in 0..<room.board[i].count {
             let lastIndexI = room.width - 1
@@ -191,8 +219,8 @@ func printPersonInRoom(room: inout Room, person: Person) {
             let side : Character = "⬛️"
             room.board[0][j] = side
             room.board[i][0] = side
-            room.board[lastIndexI][j] = side
-            room.board[i][lastIndexJ] = side
+            room.board[i][lastIndexI] = side
+            room.board[lastIndexJ][j] = side
             print(room.board[i][j], terminator: " ")
         }
         print()
@@ -200,8 +228,34 @@ func printPersonInRoom(room: inout Room, person: Person) {
     print()
 }
 
-var room8x8 = Room(width: 8, height: 8)
-var superMan = Person(name: "SuperMan", x: 3, y: 2, room: room8x8)
-var box = Person.Box(x: 3, y: 4, room: room8x8)
-printPersonInRoom(room: &room8x8, person: superMan)
-
+var room5x10 = Room(height: 8, width: 7)
+var superMan = Person(name: "SuperMan", x: 6, y: 4, room: room5x10)
+var box = Person.Box(x: 3, y:5, room: room5x10)
+superMan.move(direction: .Top, room: room5x10, box: box)
+drowRoom(room: &room5x10)
+superMan.move(direction: .Top, room: room5x10, box: box)
+drowRoom(room: &room5x10)
+superMan.move(direction: .Right, room: room5x10, box: box)
+drowRoom(room: &room5x10)
+superMan.move(direction: .Down, room: room5x10, box: box)
+drowRoom(room: &room5x10)
+superMan.move(direction: .Left, room: room5x10, box: box)
+drowRoom(room: &room5x10)
+superMan.move(direction: .Top, room: room5x10, box: box)
+drowRoom(room: &room5x10)
+superMan.move(direction: .Top, room: room5x10, box: box)
+drowRoom(room: &room5x10)
+superMan.move(direction: .Top, room: room5x10, box: box)
+drowRoom(room: &room5x10)
+superMan.move(direction: .Right, room: room5x10, box: box)
+drowRoom(room: &room5x10)
+superMan.move(direction: .Down, room: room5x10, box: box)
+drowRoom(room: &room5x10)
+superMan.move(direction: .Down, room: room5x10, box: box)
+drowRoom(room: &room5x10)
+superMan.move(direction: .Left, room: room5x10, box: box)
+drowRoom(room: &room5x10)
+superMan.move(direction: .Down, room: room5x10, box: box)
+drowRoom(room: &room5x10)
+superMan.move(direction: .Right, room: room5x10, box: box)
+drowRoom(room: &room5x10)
