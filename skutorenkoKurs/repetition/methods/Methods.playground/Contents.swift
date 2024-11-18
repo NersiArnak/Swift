@@ -1,64 +1,9 @@
-// MARK: class work
-struct Point {
-    var x: Int
-    var y: Int
-    
-    mutating func moveBy(x: Int, andY: Int) {
-        self.x += x
-        self.y += andY
-    }
-//    mutating func moveBy(x: Int, andY: Int) {
-//        self = Point(x: self.x + x, y: self.y + y)
-//    }
-}
-
-enum Color {
-    static func numberOfElements() -> Int {
-        self.printFunc()
-        return 2
-    }
-    
-    case White
-    case Black
-    
-    mutating func invert()  {
-        if self == Color.White {
-            self = Color.Black
-        }
-        else {
-            self = Color.White
-        }
-    }
-    
-    static func printFunc() {
-        //print("enum")
-    }
-    
-}
-
-var c = Color.White
-c.invert()
-c.invert()
-Color.numberOfElements()
-
-//func move(point: inout Point, byX: Int, andY: Int) -> Point {
-//    point.x += byX
-//    point.y += andY
-//    return point
-//}
-
-var p = Point(x: 1, y: 1)
-
-p.moveBy(x: 2, andY: 3)
-
 // MARK: home work
-print("\n№1")
-
 class Room {
     var height: Int
     var width: Int
     var board: [[Character]]
-    static let finalPoint : Character = "🟩"
+    private static let finalPoint : Character = "🟩"
 
     init(height: Int, width: Int) {
         let lastIndexI = width - 1
@@ -66,17 +11,19 @@ class Room {
         self.width = width
         self.height = height
         self.board = Array(repeating: Array(repeating: "⬜️", count: width), count: height)
-        
         self.board[lastIndexJ-1][lastIndexI-1] = Room.finalPoint
+        print("Цель игры:")
+        print("Донести коробку со взрывчаткой до точки обезвреживания 🧨")
+        print("Правила игры:")
+        print("Не касайтесь бортиков, иначе произойдет взрыв, двигайтесь по полю используя команды:")
+        print(".Top ⬆\n.Down ⬇\n.Left ⬅\n.Right ⮕\n")
     }
 }
 
 
 func checkPosition(x: inout Int, y: inout Int, room: Room) -> Bool {
     let lastIndexI = room.width - 1
-    y
     let lastIndexJ = room.height - 1
-    x
     var res = true
     if (x <= 0 || y <= 0) || (x >= lastIndexJ) || (y >= lastIndexI) {
         x = 1
@@ -87,12 +34,11 @@ func checkPosition(x: inout Int, y: inout Int, room: Room) -> Bool {
     return res
 }
 
-    
 class Person {
     var name : String
     var x : Int
     var y : Int
-    var count = 0
+    private var count = 0
     
     enum Direction {
         case Top
@@ -170,8 +116,7 @@ class Person {
         
         if checkPosition(x: &self.x, y: &self.y, room: room) {
             room.board[self.x][self.y] = "🥷"
-        }
-        else {
+        } else {
             print("Персонаж \(room.board[self.x][self.y]) взорвался 🧨")
         }
     }
@@ -228,34 +173,68 @@ func drowRoom(room: inout Room) {
     print()
 }
 
-var room5x10 = Room(height: 8, width: 7)
-var superMan = Person(name: "SuperMan", x: 6, y: 4, room: room5x10)
-var box = Person.Box(x: 3, y:5, room: room5x10)
-superMan.move(direction: .Top, room: room5x10, box: box)
-drowRoom(room: &room5x10)
-superMan.move(direction: .Top, room: room5x10, box: box)
-drowRoom(room: &room5x10)
-superMan.move(direction: .Right, room: room5x10, box: box)
-drowRoom(room: &room5x10)
-superMan.move(direction: .Down, room: room5x10, box: box)
-drowRoom(room: &room5x10)
-superMan.move(direction: .Left, room: room5x10, box: box)
-drowRoom(room: &room5x10)
-superMan.move(direction: .Top, room: room5x10, box: box)
-drowRoom(room: &room5x10)
-superMan.move(direction: .Top, room: room5x10, box: box)
-drowRoom(room: &room5x10)
-superMan.move(direction: .Top, room: room5x10, box: box)
-drowRoom(room: &room5x10)
-superMan.move(direction: .Right, room: room5x10, box: box)
-drowRoom(room: &room5x10)
-superMan.move(direction: .Down, room: room5x10, box: box)
-drowRoom(room: &room5x10)
-superMan.move(direction: .Down, room: room5x10, box: box)
-drowRoom(room: &room5x10)
-superMan.move(direction: .Left, room: room5x10, box: box)
-drowRoom(room: &room5x10)
-superMan.move(direction: .Down, room: room5x10, box: box)
-drowRoom(room: &room5x10)
-superMan.move(direction: .Right, room: room5x10, box: box)
-drowRoom(room: &room5x10)
+var room = Room(height: 10, width: 10)
+let norikNolik = Person(name: "Norik aka Nolik", x: 5, y: 5, room: room)
+let box = Person.Box(x: 5, y: 6, room: room)
+drowRoom(room: &room)
+norikNolik.move(direction: .Right, room: room, box: box)
+
+
+
+// MARK: class work
+struct Point {
+    var x: Int
+    var y: Int
+    
+    mutating func moveBy(x: Int, andY: Int) {
+        self.x += x
+        self.y += andY
+    }
+//    mutating func moveBy(x: Int, andY: Int) {
+//        self = Point(x: self.x + x, y: self.y + y)
+//    }
+}
+
+enum Color {
+    static func numberOfElements() -> Int {
+        self.printFunc()
+        return 2
+    }
+    
+    case White
+    case Black
+    
+    mutating func invert()  {
+        if self == Color.White {
+            self = Color.Black
+        }
+        else {
+            self = Color.White
+        }
+    }
+    
+    static func printFunc() {
+        //print("enum")
+    }
+    
+}
+
+var c = Color.White
+c.invert()
+c.invert()
+Color.numberOfElements()
+
+//func move(point: inout Point, byX: Int, andY: Int) -> Point {
+//    point.x += byX
+//    point.y += andY
+//    return point
+//}
+
+var p = Point(x: 1, y: 1)
+
+p.moveBy(x: 2, andY: 3)
+
+
+ 
+
+

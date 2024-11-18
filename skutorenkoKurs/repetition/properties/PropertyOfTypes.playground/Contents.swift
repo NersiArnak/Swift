@@ -189,12 +189,13 @@ class HumanHW {
     }
 }
 
-func printHuman(human: HumanHW) {
-    print("Имя: \(human.name)\nФамилия: \(human.surname)\nОтчество: \(human.fatherName)\nРост: \(human.height)\nВес: \(human.weight)\n")
-}
 
-let human1 = HumanHW(name: "Arnak", surname: "Nersisyan", fatherName: "Garikovich", height: 174.9, weight: 67.7)
-
-printHuman(human: human1)
+//func printHuman(human: HumanHW) {
+//    print("Имя: \(human.name)\nФамилия: \(human.surname)\nОтчество: \(human.fatherName)\nРост: \(human.height)\nВес: \(human.weight)\n")
+//}
+//
+//let human1 = HumanHW(name: "Arnak", surname: "Nersisyan", fatherName: "Garikovich", height: 174.9, weight: 67.7)
+//
+//printHuman(human: human1)
 
 
