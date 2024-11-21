@@ -137,7 +137,6 @@ print("\n№2")
 
 
 struct Segment {
-    
     struct Point {
         var a: Double {
             didSet {

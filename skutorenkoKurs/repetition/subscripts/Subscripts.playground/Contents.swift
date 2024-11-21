@@ -75,7 +75,7 @@ class TicTacToe {
         let lastHeight = height - 1
         let lastWidth = width - 1
         
-        if x < 0 || x > lastHeight || y < 0 || y > lastWidth {
+        if x <= 0 || x >= lastHeight || y <= 0 || y >= lastWidth {
             print("[\(x),\(y)] - неверное значение")
             return nil
         }
@@ -103,7 +103,6 @@ class TicTacToe {
             print(winner)
         }
         
-        
         if (board[x][right] == saveValue && board[x][twoRight] == saveValue) || (board[x][left] == saveValue && board[x][twoLeft] == saveValue) {
             print(winner)
         }
@@ -113,9 +112,7 @@ class TicTacToe {
 }
 
 let board = TicTacToe(height: 8, width: 8)
-board[2, 1, .cross]
-board[2, 2, .cross]
-board[2, 3, .cross]
+board[6, 6, .cross]
 board.drowPrint(board: &board.board)
 
 // MARK: class work

@@ -61,19 +61,18 @@ class Person {
                 else {
                     print("Победа 📌")
                 }
-            
             } else {
                 print("Коробка взорвалась 🧨")
             }
         }
         
         func moveTop(x: inout Int, y: Int, room: Room, box: Box) {
-            count += 1
             if x - 1 == box.x && y == box.y {
                 box.x = box.x - 1
                 updateBoxPosition()
             }
             x -= 1
+            count += 1
             print("\(count). Ход вверх")
         }
         
