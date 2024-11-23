@@ -1,79 +1,3 @@
-// MARK: class work
-/*final*/ class Human {
-    final var finalProperty: String = "final"
-    var firstName: String = " "
-    var lastName: String = " "
-    
-    var fullName: String {
-        return firstName + " " + lastName
-    }
-    
-    func sayHello() -> String {
-        return "Hello, \(fullName)"
-    }
-}
-
-class SmartHuman : Human {
-    
-}
-
-class Student : SmartHuman {
-    override func sayHello() -> String {
-        return super.sayHello() + ", my friend"
-    }
-}
-
-class Kid : Human {
-    var favoriteToy = "iMac"
-    override func sayHello() -> String {
-        return "agu"
-    }
-    
-    override var fullName: String {
-        return firstName
-    }
-    
-    override var firstName: String {
-        set {
-            super.firstName = newValue + " :)"
-        }
-        get {
-            return super.firstName
-        }
-    }
-    
-    override var lastName: String {
-        didSet {
-            print("new value - \(self.lastName)")
-        }
-    }
-}
-
-let human = Human()
-human.firstName = "John"
-human.lastName = "Doe"
-human.fullName
-human.sayHello()
-
-let student = Student()
-student.firstName = "Arnak"
-student.lastName = "Nersisyan"
-student.fullName
-student.sayHello()
-
-let kid = Kid()
-kid.firstName = "Gari"
-kid.lastName = "Nersisyan"
-kid.fullName
-kid.sayHello()
-
-let array : [Human] = [human, kid, student]
-
-for value in array {
-    print(value.sayHello())
-}
-
-
 // MARK: home work
 print("\n№1")
 class Artist {
@@ -236,17 +160,14 @@ let arrayOfVehicles: [Vehicle] = [airplane, ship, helicopter, car, train]
 
 func transportСomparison(distance: Double, array: [Vehicle]) {
     
-    //Считает кол-во потраченного времени на полет
     func calculateTime(speed : Double) -> Double {
         return distance / speed
     }
     
-    //Считает кол-во потраченных денег на всех пассажиров транспорта
     func calculatePrice(priceOneTrip: Double, countOfPassengers: Int) -> Double {
         return priceOneTrip * Double(countOfPassengers)
     }
     
-    //Считает минимальное времени на перелет
     func minTimeVehicle(array: [Vehicle]) -> (Double, String) {
         var min : Double?
         var nameVehicle = ""
@@ -260,7 +181,6 @@ func transportСomparison(distance: Double, array: [Vehicle]) {
         return (min!, nameVehicle)
     }
     
-    //Количество потраченных денег
     func priceToAllTrip(array: [Vehicle]) -> (Double, Int) {
         var allPrice : Double = 0
         var countVehicle : Int = 0
@@ -418,3 +338,77 @@ func calcLivingOrganisms(array: [LivingOrganism]) -> (Int, Int, Int, Int) {
 }
 
 calcLivingOrganisms(array: arrayAnimals)
+
+// MARK: class work
+/*final*/ class Human {
+    final var finalProperty: String = "final"
+    var firstName: String = " "
+    var lastName: String = " "
+    
+    var fullName: String {
+        return firstName + " " + lastName
+    }
+    
+    func sayHello() -> String {
+        return "Hello, \(fullName)"
+    }
+}
+
+class SmartHuman : Human {}
+
+class Student : SmartHuman {
+    override func sayHello() -> String {
+        return super.sayHello() + ", my friend"
+    }
+}
+
+class Kid : Human {
+    var favoriteToy = "iMac"
+    override func sayHello() -> String {
+        return "agu"
+    }
+    
+    override var fullName: String {
+        return firstName
+    }
+    
+    override var firstName: String {
+        set {
+            super.firstName = newValue + " :)"
+        }
+        get {
+            return super.firstName
+        }
+    }
+    
+    override var lastName: String {
+        didSet {
+            print("new value - \(self.lastName)")
+        }
+    }
+}
+
+let human = Human()
+human.firstName = "John"
+human.lastName = "Doe"
+human.fullName
+human.sayHello()
+
+let student = Student()
+student.firstName = "Arnak"
+student.lastName = "Nersisyan"
+student.fullName
+student.sayHello()
+
+let kid = Kid()
+kid.firstName = "Gari"
+kid.lastName = "Nersisyan"
+kid.fullName
+kid.sayHello()
+
+let array : [Human] = [human, kid, student]
+
+for value in array {
+    print(value.sayHello())
+}
+
