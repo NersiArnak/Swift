@@ -1,4 +1,6 @@
-// MARK: class work
+import Foundation
+
+// MARK: class work (part №1)
 class Student1 {
     var firstName : String
     var lastName : String
@@ -106,15 +108,158 @@ class Student : Human {
         super.init(weight: 0, age: 0)
         self.weight = 50
     }
+     
+    override convenience init(weight: Int, age: Int) {
+        self.init(firstName: "")
+        self.weight = weight
+        self.age = age
+    }
     
     convenience init(firstName: String) {
         self.init(firstName: firstName, lastName: "")
+        self.age = 28
+    }
+    
+    deinit {
+        print("Human deinitialized")
     }
 }
 
 let student1 = Student(firstName: "a")
 student1.weight
 let student2 = Student(firstName: "a", lastName: "b")
+
+struct Size {
+    var width = 0.0, height = 0.0
+}
+
+var size = Size(width: 100, height: 150)
+size.width
+
+// MARK: class work (part№2)
+class Doctor : Student {
+    var fieldOfStude : String
+
+    init(fieldOfStude: String) {
+        self.fieldOfStude = fieldOfStude
+        super.init(firstName: "", lastName: "")
+    }
+    
+//    convenience init(fieldOfStude: String) {
+//        self.init(firstName: "Doctor", lastName: "House")
+//        self.fieldOfStude = fieldOfStude
+//    }
+    
+//    override init(weight: Int, age: Int) {
+//        self.fieldOfStude = "Medicine"
+//        super.init(weight: weight, age: age)
+//    }
+    
+    override init(firstName: String, lastName: String) {
+        self.fieldOfStude = "Medicine"
+        super.init(firstName: firstName, lastName: lastName)
+    }
+    
+    convenience init(firstName: String) {
+        self.init(fieldOfStude: "Medicine")
+        self.age = 35
+        self.firstName = firstName
+    }
+}
+
+let doc = Doctor(firstName: "Angelina")
+
+// MARK: class work (part№3)
+enum Color : Int {
+    case Black, White
+    
+    init?(value : Int) {
+        switch value {
+        case 0: self = .Black
+        case 1: self = .White
+        default: return nil
+        }
+    }
+}
+
+struct SizeRoom {
+    var width : Int
+    var height :  Int
+    
+    init?(width : Int, height : Int) {
+        if width < 0 || height < 0 {
+            return nil
+        }
+        self.width = width
+        self.height = height
+    }
+}
+
+class Friend : Human {
+    var name : String!
+    
+    var skin : Color = {
+        let random = 1
+        return Color(value: random)!
+    }()
+    
+    init?(name: String) {
+        self.name = name
+        super.init(weight: 0, age: 0)
+        if name.isEmpty {
+            return nil
+        }
+    }
+    
+    required init() {
+        self.name = "Hy!"
+        super.init(weight: 0, age: 0)
+    }
+    
+    deinit {
+        print("Friend deinitialized")
+    }
+}
+
+let friend = Friend(name: "") //nil
+friend?.weight
+
+class BestFriend : Friend {
+    override init?(name: String) {
+        if name.isEmpty {
+            super.init()
+        } else {
+            super.init(name:name)
+        }
+    }
+    
+    required init() {
+        super.init()
+    }
+    
+    deinit {
+        print("BestFriend deinitialized")
+    }
+}
+
+let b = BestFriend(name: "b")
+b?.name
+
+let a = BestFriend(name: "a")
+a!.skin
+
+let s = BestFriend(name: "s")
+s!.skin
+
+let t = BestFriend(name: "t")
+t!.skin
+
+struct Test {
+    var bestFriend : BestFriend? = BestFriend(name: "")
+}
+
+var test : Test? = Test()
+test!.bestFriend = nil
 
 
 // MARK: home work
@@ -165,7 +310,6 @@ class Car {
     }
     
  }
-
 
 let bmwM5 = Car(make: "Bmw", model: "M5", driveMod: .full, typeBody: .sedan)
 bmwM5.printCharacteristics()
