@@ -236,10 +236,6 @@ class BestFriend : Friend {
     required init() {
         super.init()
     }
-    
-    deinit {
-        print("BestFriend deinitialized")
-    }
 }
 
 let b = BestFriend(name: "b")
@@ -308,7 +304,6 @@ class Car {
     convenience init(make: String) {
         self.init(make: make, model: "non", driveMod: .non, typeBody: .non)
     }
-    
  }
 
 let bmwM5 = Car(make: "Bmw", model: "M5", driveMod: .full, typeBody: .sedan)
