@@ -1,6 +1,6 @@
 import UIKit
 import Foundation
-// MARK: - Task #1 [eazy] ✅
+// MARK: - Task #1 [easy] ✅
 
 let firstName = "Arnak"
 let lastName = "Nersisyan"
@@ -9,7 +9,7 @@ let greeting = "Hello, my name is \(fullName)!"
 print("Task #1")
 print(greeting)
 
-// MARK: - Task #2 [eazy]
+// MARK: - Task #2 [easy]
 
 let unicodeString = "\u{12e8} \u{2764}"
 print("\nTask #2")
@@ -32,7 +32,7 @@ for i in unicodeString.unicodeScalars {
 }
 print()
 
-// MARK: - Task #3 [eazy]
+// MARK: - Task #3 [easy]
 
 var mutableString = "I want to sleep"
 mutableString.append(" :(")
@@ -43,7 +43,7 @@ if let sleep = mutableString.range(of: "sleep") {
 print("\nTask #3")
 print(mutableString)
 
-// MARK: - TASK #4 [eazy]
+// MARK: - TASK #4 [easy]
 
 let sampleString = "Dreams Infold Softly as Night Blankets the World in Silence"
 let startIndex = sampleString.startIndex
@@ -52,7 +52,7 @@ let result = sampleString[startIndex...endIndex]
 print("\nTask #4")
 print(result)
 
-// MARK: - Task #5 [eazy+] ✅
+// MARK: - Task #5 [easy+] ✅
 
 print("\nTask #5")
 var mutableGreeting = "Night whispers dreams as stars fade, welcoming peaceful slumber’s embrac"
@@ -175,6 +175,7 @@ let result3 = (3 == 3) && (2 != 2) //false
 let result4 = ((12 / 4) == 3) || ((7 % 2) != 0) // true
 
 // MARK: - Task #13 [hard+]
+
 print("\nTask #13")
 
 enum RegistrationError: Error {
@@ -207,14 +208,14 @@ func registerUser(username: String?, password: String?, age: Int?, email: String
         return
     }
     
-    guard let email, checkDog(email: email) else {
+    guard let email, /*checkDog(email: email)*/ email.contains("@") else {
         print("Ошибка: Неверный формат email")
         return
     }
     print("Пользователь \(username) успешно зарегистрирован!")
 }
 
-try registerUser(username: "Arnak", password: nil, age: 20, email: "arnonersi777@gmail.com")
+try registerUser(username: "Arnak", password: "NersiArno", age: 20, email: "arnonersi777@gmail.com")
 
 
 
