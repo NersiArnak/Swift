@@ -115,7 +115,7 @@ func checkMonth(month: Int, day: Int, hemisphere: String) {
 checkMonth(month: 12, day: 12, hemisphere: Hemisphere.north.rawValue)
 
 
-// MARK : - Task #3 [easy+] ✅
+// MARK: - Task #3 [easy+] ✅
 
 print("\nTask #3")
 print("Внимание! Диапозон оценок от 1 до 100")
@@ -189,7 +189,7 @@ func checkGradeStudent(grade: Int?, activityInClass: Bool) {
 }
 checkGradeStudent(grade: 39, activityInClass: true)
 
-// MARK : - Task #4 [easy+] ✅
+// MARK: - Task #4 [easy+] ✅
 
 print("\nTask #4")
 ///Принимает имя и время, выводит текстовое сообщение времени суток
@@ -257,33 +257,93 @@ let test3 = square(number: nil)
 squareRoot(number: test2)
 squareRoot(number: test3)
 
-// MARK: - Task #6 [medium]
+// MARK: - Task #6 [medium] ✅
 
 print("\nTask #6")
 func average(num1: Int, num2: Int, num3: Int? = nil) -> Int? {
-    guard let unWrapNum3 = num3 else {
-        return (num1 + num2) / 2
-    }
-    if num1 > 0 && num2 > 0 && unWrapNum3 > 0 {
-        return (num1 + num2 + unWrapNum3) / 3
-    } else {
+    guard num1 > 0, num2 > 0 else {
         print("Не все аргументы положительные - недопустимо")
         return nil
     }
+    if let unWrapNum3 = num3 {
+        if unWrapNum3 > 0 {
+            return (num1 + num2 + unWrapNum3) / 3
+        } else {
+            print("Не все аргументы положительные - недопустимо")
+            return nil
+        }
+    }
+    return (num1 + num2) / 2
 }
 
 func average(num1: Int, num2: Int, num3: Int, num4: Int?) -> Int? {
-    guard let unWrapNum4 = num4 else {
-        print("4 аргумент со значением nil - недопустимо")
-        return nil
-    }
-    if num1 > 0 && num2 > 0 && num3 > 0 && unWrapNum4 > 0 {
-        return (num1 + num2 + num3 + unWrapNum4) / 4
-    } else {
+    guard num1 > 0, num2 > 0, num3 > 0 else {
         print("Не все аргументы положительные - недопустимо")
         return nil
     }
+    if let unWrapNum4 = num4 {
+        if unWrapNum4 > 0 {
+            return (num1 + num2 + num3 + unWrapNum4) / 4
+        } else {
+            print("Не все аргументы положительные - недопустимо")
+            return nil
+        }
+    }
+    return (num1 + num2 + num3) / 3
 }
 
-average(num1: 10, num2: 5)
-average(num1: 10, num2: 3, num3: 20, num4: 12)
+
+if let testAverage1 = average(num1: 10, num2: 20, num3: -1) {
+    print("Среднее значение = \(testAverage1)")
+}
+
+if let testAverage2 = average(num1: 12, num2: 12, num3: 144, num4: 2) {
+    print("Среднее значение = \(testAverage2)")
+}
+
+// MARK: - Task #7 [medium+] ✅
+
+print("\nTask #7")
+func ckeckUserName(userName: String?) {
+    var finalName = "гость"
+    if let unWrappedUserName = userName?.trimmingCharacters(in: .whitespacesAndNewlines) ,unWrappedUserName.count > 3 {
+        finalName = unWrappedUserName
+    }
+    print("Привет, \(finalName)! Добро пожаловать в наш маленький мир 🕊")
+}
+
+ckeckUserName(userName: "")
+
+// MARK: - Task #8 [hard] ✅
+
+print("\nTask #8")
+func testScore(optionalScore: Int? = nil) {
+    let checkScore = optionalScore ?? 0
+    guard checkScore >= 0, checkScore <= 5 else {
+        print("Балл указан не верно")
+        return
+    }
+    if checkScore == 0 {
+        print("Не указан балл")
+    } else {
+        print("Текущий балл - \(checkScore)")
+    }
+}
+
+testScore(optionalScore: -1)
+
+// MARK: - Task #9 [hard] ✅
+
+print("\nTask #9")
+func checkPerson(firstName: String?, lastName: String?, age: Int?, email: String?, telephone: String?) {
+    if let firstName, let lastName, let age, age >= 18, let email, email.contains("@"), let telephone {
+        print("Данные корректны")
+        print("Имя - \(firstName)\nФамилия - \(lastName)\nВозраст - \(age)")
+        print("Email - \(email)\nТелефон - \(telephone)")
+    } else {
+        print("Данные не корректны, просьба исправить")
+    }
+}
+
+checkPerson(firstName: "Arnak", lastName: "Nersisyan", age: 20, email: "arnonersi777@gmail.com", telephone: "+7(950)212-66-26")
+
