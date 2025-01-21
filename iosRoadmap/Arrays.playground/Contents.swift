@@ -129,4 +129,6 @@ print()
 drowGrid(grid5x5)
 print("\nЭлемент на по позиции [2][2]: \(grid5x5[2][2])")
 
-
+let angelina = 12
+var arch = angelina
+arch = 13
