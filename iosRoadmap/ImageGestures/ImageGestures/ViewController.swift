@@ -22,6 +22,8 @@ class ViewController: UIViewController {
         width: 250,
         height: 70)
     )
+
+    private var alert = UIAlertController(title: "Тест для Димы", message: "Дима основной текст", preferredStyle: .alert)
     
     private var indexImage = 0
     
@@ -76,6 +78,11 @@ class ViewController: UIViewController {
         button.addTarget(self, action: #selector(buttonPressed), for: .touchDown)
         button.addTarget(self, action: #selector(buttonReleased), for: .touchUpInside)
         button.addTarget(self, action: #selector(buttonReleased), for: .touchUpOutside)
+    }
+    
+    func setupAlert() {
+        let ok = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(ok)
     }
     
     @objc
